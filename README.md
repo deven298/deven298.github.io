@@ -1,3 +1,3 @@
-# deven.github.io
+# My personal webpage
 
-[Website](https://deven298.github.io/)
+Best place to learn about me and to reach out to me.
