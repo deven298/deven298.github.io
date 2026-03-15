@@ -16,10 +16,9 @@ Built with plain HTML/CSS/JS and served via GitHub Pages. Jekyll is used only as
 ├── _config.yml         # Jekyll / GitHub Pages config
 ├── Gemfile             # Ruby deps (Jekyll + github-pages gem)
 ├── images/
-│   ├── deven.webp      # Profile photo (used in hero + about)
-│   ├── devenpatel.pdf  # Resume
 │   └── favicon.ico     # Browser tab icon
-└── assets/             # Legacy Stellar template assets (unused)
+└── assets/
+    └── Deven_Resume.pdf      # Resume PDF for download
 ```
 
 ---
