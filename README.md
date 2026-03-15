@@ -48,10 +48,9 @@ open http://localhost:4000
 |---|---|
 | Content (text, links, jobs) | `index.html` |
 | All styling and layout | `style.css` |
-| Design tokens (colours, fonts) | `:root` block at top of `style.css` |
+| Design tokens (colors, fonts) | `:root` block at top of `style.css` |
 | 404 page | `404.html` |
-| Profile photo | `images/deven.webp` |
-| Resume PDF | `images/devenpatel.pdf` |
+| Resume PDF | `assets/Deven_Resume.pdf` |
 
 **Key CSS variables** (in `style.css`):
 ```css
