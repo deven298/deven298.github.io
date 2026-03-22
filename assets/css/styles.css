@@ -1,6 +1,3 @@
-/* ─────────────────────────────────────────────
-   Deven Patel — Portfolio Styles
-   ───────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -138,8 +135,19 @@ nav.scrolled { padding: 0.875rem 3rem; }
   bottom: 0; left: 10%;
 }
 
+.hero-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  max-width: 1100px;
+  position: relative;
+  z-index: 1;
+}
+
 .hero-inner {
-  max-width: 900px;
+  flex: 1;
+  min-width: 0;
   position: relative;
   z-index: 1;
 }
@@ -230,6 +238,66 @@ nav.scrolled { padding: 0.875rem 3rem; }
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-top: 0.25rem;
+}
+
+.hero-photo-wrap {
+  flex-shrink: 0;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.9s ease 0.55s forwards;
+}
+
+.hero-photo-frame {
+  position: relative;
+  width: 340px;
+  height: 440px;
+}
+
+.hero-photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 16px;
+  background: var(--bg3);
+  z-index: 0;
+}
+
+.hero-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  opacity: 0.75;
+  z-index: 0;
+}
+
+.hero-photo-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 212, 170, 0.22);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px var(--border),
+    0 0 70px rgba(0, 212, 170, 0.07);
+  display: block;
+}
+
+.hero-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 38%;
+  background: linear-gradient(to bottom, transparent, rgba(8, 11, 16, 0.4));
+  border-radius: 0 0 14px 14px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero-socials {
@@ -798,6 +866,21 @@ svg { display: inline-block; vertical-align: middle; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-flex {
+    flex-direction: column-reverse;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  .hero-photo-wrap {
+    align-self: center;
+  }
+  .hero-photo-frame {
+    width: 260px;
+    height: 320px;
+  }
+}
+
 @media (max-width: 768px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
@@ -805,6 +888,10 @@ svg { display: inline-block; vertical-align: middle; }
   #hero { padding: 7rem 1.5rem 3rem; }
   .hero-socials { display: none; }
   .hero-stats { gap: 2rem; flex-wrap: wrap; }
+  .hero-photo-frame {
+    width: 220px;
+    height: 270px;
+  }
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
   .exp-list::before { display: none; }
