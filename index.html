@@ -13,8 +13,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="apple-touch-icon" href="images/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="images/favicons/light/favicon.ico" id="favicon" />
+  <link rel="apple-touch-icon" href="images/favicons/light/apple-touch-icon.png" id="favicon-apple" />
+
+  <!-- Flash-free theme init: runs before first paint -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('dp-theme');
+        // Default is light; only switch to dark if explicitly saved
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -30,6 +47,26 @@
       <li><a href="#education">Education</a></li>
       <li><a href="assets/Deven_Resume.pdf" class="nav-resume" target="_blank">Resume</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle colour theme">
+          <!-- Sun icon — shown in dark mode (click to go light) -->
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1"  x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22"  x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1"  y1="12" x2="3"  y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon icon — shown in light mode (click to go dark) -->
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </li>
     </ul>
   </nav>
 
@@ -71,7 +108,6 @@
       <div class="hero-photo-wrap">
         <div class="hero-photo-frame">
           <img src="images/deven.webp" alt="Deven Patel" class="hero-photo-img" />
-          <div class="hero-photo-overlay"></div>
         </div>
       </div>
     </div>
@@ -590,13 +626,38 @@
   </footer>
 
   <script>
-    // Nav scroll shrink
+    // ─── NAV SCROLL SHRINK ───
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Scroll reveal — progressive enhancement
+    // ─── THEME TOGGLE ───
+    const THEME_KEY = 'dp-theme';
+    const html = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const favicon = document.getElementById('favicon');
+    const faviconApple = document.getElementById('favicon-apple');
+
+    function applyTheme(theme) {
+      html.setAttribute('data-theme', theme);
+      const ico = theme === 'dark'
+        ? 'images/favicons/dark/favicon.ico'
+        : 'images/favicons/light/favicon.ico';
+      const apple = theme === 'dark'
+        ? 'images/favicons/dark/apple-touch-icon.png'
+        : 'images/favicons/light/apple-touch-icon.png';
+      favicon.href = ico;
+      faviconApple.href = apple;
+      try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    }
+
+    toggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    // ─── SCROLL REVEAL ───
     const revealEls = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
       revealEls.forEach(el => el.classList.add('hidden'));
@@ -614,7 +675,7 @@
       revealEls.forEach(el => observer.observe(el));
     }
 
-    // Active nav link highlight on scroll
+    // ─── ACTIVE NAV HIGHLIGHT ───
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
