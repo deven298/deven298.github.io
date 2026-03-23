@@ -846,6 +846,24 @@ section {
 .contact-info a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
 .contact-info a:hover { color: var(--accent); }
 
+.copyPhone {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.copyPhone:hover {
+  border-color: rgba(194, 93, 40, 0.5);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
 /* ─── FOOTER ─── */
 footer {
   border-top: 1px solid var(--border);
@@ -1002,6 +1020,11 @@ svg { display: inline-block; vertical-align: middle; }
 /* Contact orb */
 [data-theme="dark"] .contact-orb {
   background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .copyPhone:hover {
+  border-color: rgba(0, 212, 170, 0.3);
+  background: rgba(0, 212, 170, 0.06);
 }
 
 /* Exp date range hover/highlight */

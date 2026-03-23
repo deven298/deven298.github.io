@@ -608,7 +608,16 @@
         </div>
         <div class="contact-info">
           <a href="mailto:iamdevenpatel@gmail.com">iamdevenpatel@gmail.com</a>
-          <span>+91 989-831-3674</span>
+          <button 
+          class="copyPhone" 
+          onclick="
+            navigator.clipboard.writeText('+919898313674')
+            .then(()=>{
+              this.textContent='✓ Copied!';
+              setTimeout(()=>this.innerHTML='📋 +91 •••-•••-••••',2000)
+            })">
+            📋 +91 •••-•••-••••
+          </button>
         </div>
       </div>
     </div>
